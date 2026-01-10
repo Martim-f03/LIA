@@ -5,7 +5,6 @@
 :- dynamic(ajuda_usada/1).      % Para registar as ajudas usadas
 :- dynamic(jogador_acertou/0).  % Para registar se o jogador acertou a pergunta
 :- dynamic(jogador_errou/0).    % Para registar se o jogador errou a pergunta
-:- consult('perguntas.pl').
 
 % -----------------------------------
 % --- Regras de Inferência Lógica ---
@@ -85,10 +84,14 @@ ciclo_jogo(16, _) :-
 ciclo_jogo(N, Acumulado) :-
     pergunta(N, Texto, Opcoes, RCerta),
     valor_pergunta(N, ValorN),
-    format('\n Pergunta ~w (~w€) ---\n~w\n', [N, ValorN, Texto]),
+    format('\nPergunta ~w (~w€)\n~w\n', [N, ValorN, Texto]),
     mostrar_opcoes(Opcoes),
     write('\nResposta (A,B,C,D), Ajuda (50/50, Público, Telefone) ou stop do jogo: '),
-    read(Input),
+    % Ler uma linha do utilizador para que possa digitar A ou a ou stop sem sintaxe Prolog
+    read_line_to_string(user_input, RawInput),
+    normalize_space(string(Trim), RawInput),
+    string_upper(Trim, UpperTrim),
+    ( UpperTrim = "STOP" -> Input = stop ; atom_string(Input, UpperTrim)),
     processar_jogada(Input, RCerta, N, Acumulado, NovoN, NovoAcumulado),
     (   NovoN == erro -> format('Errou! Sai com o patamar de ~w€.\n', [NovoAcumulado]);
         NovoN == stop -> writeln('Desistiu de continuar a jogar.');
@@ -103,7 +106,7 @@ processar_jogada(Resp, RCerta, N, _, NovoN, ValorN) :-
     Resp == RCerta, !,
     assertz(jogador_acertou),
     (conclusao(progresso) -> writeln('Resposta certa! O jogo continua.')),                  % Acertou na resposta
-    (conclusao_incorrecta(resposta_certa) -> writeln('Resposta certa! O jogo continua.')),  % Acertou com ajuda?
+    (conclusao_incorrecta(resposta_certa) -> writeln('Resposta certa! O jogo continua - mistaken.')),  % Acertou com ajuda?
     retract(jogador_acertou),
     valor_pergunta(N, ValorN),
     NovoN is N + 1.

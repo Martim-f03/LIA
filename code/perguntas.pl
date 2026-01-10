@@ -1,89 +1,89 @@
 :- encoding(utf8).
 
-pergunta(Numero, 'Pergunta?', 
-         ['Opção A','Opção B','Opção C','Opção D'], 
-         'Letra_da_Resposta_Correcta').
+%pergunta(Numero, 'Pergunta?', 
+%         ['Opção A','Opção B','Opção C','Opção D'], 
+%         'Letra_da_Resposta_Correcta').
          
-pergunta(1, 'Qual é o plural de "pão"?',
-         ['Pães','Pãos','Pãoses','Pãezes'],
+pergunta(1, 'Qual é o plural da palavra pão?',
+         ['A - Pães','B - Pãos','C - Pãoses','D - Pãezes'],
          'A').
 
 pergunta(2, 'Quantos dias tem o mês de Fevereiro num ano comum?',
-         ['28','29','30','31'],
+         ['A - 28','B - 29','C - 30','D - 31'],
          'A').
 
 pergunta(3, 'Qual é o símbolo químico da água?',
-         ['H2O','O2','CO2','HO'],
+         ['A - H2O','B - O2','C - CO2','D - HO'],
          'A').
 
 pergunta(4, 'Em que continente se encontra Portugal?',
-         ['Ásia','América','Europa','África'],
+         ['A - Ásia','B - América','C - Europa','D - África'],
          'C').
 
 pergunta(5, 'Qual é o planeta mais próximo do Sol?',
-         ['Vénus','Mercúrio','Marte','Terra'],
+         ['A - Vénus','B - Mercúrio','C - Marte','D - Terra'],
          'B').
 
 pergunta(6, 'Quem escreveu "Os Lusíadas"?',
-         ['Camilo Castelo Branco','Padre António Vieira','Eça de Queirós','Luís de Camões'],
+         ['A - Camilo Castelo Branco','B - Padre António Vieira','C - Eça de Queirós','D - Luís de Camões'],
          'D').
 
 pergunta(7, 'Em que ano começou a Segunda Guerra Mundial?',
-         ['1939','1941','1918','1945'],
+         ['A - 1939','B - 1941','C - 1918','D - 1945'],
          'A').
 
 pergunta(8, 'Qual é a capital da Noruega?',
-         ['Oslo','Estocolmo','Helsínquia','Copenhaga'],
+         ['A - Oslo','B - Estocolmo','C - Helsínquia','D - Copenhaga'],
          'A').
 
 pergunta(9, 'Qual é o maior oceano do planeta?',
-         ['Atlântico','Índico','Pacífico','Ártico'],
+         ['A - Atlântico','B - Índico','C - Pacífico','D - Ártico'],
          'C').
 
 pergunta(10, 'Quem pintou a Mona Lisa?',
-         ['Michelangelo','Leonardo da Vinci','Botticelli','Rafael'],
+         ['A - Michelangelo','B - Leonardo da Vinci','C - Botticelli','D - Rafael'],
          'B').
 
 pergunta(11, 'Qual destes números é primo?',
-         ['21','33','37','49'],
+         ['A - 21','B - 33','C - 37','D - 49'],
          'C').
 
 pergunta(12, 'O que mede a escala Richter?',
-         ['Velocidade do vento','Intensidade sísmica','Temperatura','Radiação'],
+         ['A - Velocidade do vento','B - Intensidade sísmica','C - Temperatura','D - Radiação'],
          'B').
 
 pergunta(13, 'Qual é o maior deserto do mundo?',
-         ['Saara','Gobi','Antárctida','Kalahari'],
+         ['A - Saara','B - Gobi','C - Antárctida','D - Kalahari'],
          'C').
 
 pergunta(14, 'Quem formulou a teoria da relatividade?',
-         ['Newton','Einstein','Tesla','Bohr'],
+         ['A - Newton','B - Einstein','C - Tesla','D - Bohr'],
          'B').
 
 pergunta(15, 'Qual é o elemento químico com símbolo Au?',
-         ['Alumínio','Prata','Ouro','Argónio'],
+         ['A - Alumínio','B - Prata','C - Ouro','D - Argónio'],
          'C').
 
 %Perguntas de reserva
 /*
 pergunta(16, 'Em que país surgiu o Renascimento?',
-         ['França','Itália','Alemanha','Espanha'],
+         ['A - França','B - Itália','C - Alemanha','D - Espanha'],
          'B').
 
 pergunta(17, 'Qual é o maior rio da América do Sul?',
-         ['Amazonas','Orinoco','São Francisco','Madeira'],
+         ['A - Amazonas','B - Orinoco','C - São Francisco','D - Madeira'],
          'A').
 
 pergunta(18, 'Qual destas obras é de Shakespeare?',
-         ['Crime e Castigo','Dom Quixote','Hamlet','Fausto'],
+         ['A - Crime e Castigo','B - Dom Quixote','C - Hamlet','D - Fausto'],
          'C').
 
 pergunta(19, 'Quem descobriu a penicilina?',
-         ['Fleming','Curie','Pasteur','Darwin'],
+         ['A - Fleming','B - Curie','C - Pasteur','D - Darwin'],
          'A').
 
 pergunta(20, 'Qual é a estrela mais próxima da Terra depois do Sol?',
-         ['Sirius','Betelgeuse','Proxima Centauri','Vega'],
+         ['A - Sirius','B - Betelgeuse','C - Proxima Centauri','D - Vega'],
          'C').
 */
 
