@@ -8,10 +8,6 @@
 :- dynamic(acumulado/1).        % Para registar o valor acumulado pelo jogador
 :- dynamic(nivel/1).            % Para registar o nível atual do jogador (pois pode voltar a patamares anteriores)
 
-:- discontiguous(conclusao/1).
-:- discontiguous(verdadeiro/1).
-:- discontiguous(falso/1).
-
 % -----------------------------------
 % --- Regras de Inferência Lógica ---
 % -----------------------------------
@@ -39,8 +35,8 @@ conclusao(nao_resposta_certa) :-
 % ----------------------
 % --- Modus Mistaken ---
 % ----------------------
-% Ajuda torna possível progredir no jogo apesar de resposta errada
-verdadeiro(progresso) :- ajuda_usada(_).
+% Apesar da resposta errada, ajudas permitem progredir no jogo
+verdadeiro(progresso).
 conclusao_incorrecta(resposta_certa) :-
     implica(resposta_certa, progresso),
     verdadeiro(progresso).
@@ -83,20 +79,20 @@ jogar :-
     writeln('--- Bem-Vindo ao Quem Quer Ser Milionário ---'),
     % Inserir aqui o som de ínicio do jogo? 
     % Início do jogo na 1ª pergunta e com 0€ acumulados.
-    ciclo_jogo(1).
+    ciclo_jogo(1, 0).
 
 % Fim do jogo, após 15 perguntas certas consecutivas.
-ciclo_jogo(16) :- 
+ciclo_jogo(16, _) :- 
     writeln('PARABÉNS! É O NOVO MILIONÁRIO!'),
+    % Inserir Ascii Art para festejar o jogador milionário
+    % Inserir som para um jogador milionário
     !.
 
 % Jogo
-ciclo_jogo(N) :-
-    % validar índice da pergunta
-    ( integer(N), between(1,15,N) -> Q = N ; Q = 1 ),
-    pergunta(Q, Texto, Opcoes, RCerta),
-    valor_pergunta(Q, ValorN),
-    format('\nPergunta ~w (~w€)\n~w\n', [Q, ValorN, Texto]),
+ciclo_jogo(N, Acumulado) :-
+    pergunta(N, Texto, Opcoes, RCerta),
+    valor_pergunta(N, ValorN),
+    format('\nPergunta ~w (~w€)\n~w\n', [N, ValorN, Texto]),
     mostrar_opcoes(Opcoes),
     write('\nResposta (A,B,C,D), Ajuda (50/50, Público, Telefone) ou stop do jogo: '),
     % Ler uma linha do utilizador para que possa digitar a opção escolhida (e.g., A ou a), ou Ajuda, ou Stop sem a sintaxe Prolog.
@@ -110,67 +106,69 @@ ciclo_jogo(N) :-
         UpperAtom == 'AJUDA' -> Input = ajuda;
         Input = UpperAtom
     ),
-    processar_jogada(Input, RCerta, Q, NextQ),
-    (   NextQ == stop -> acumulado(A), format('Desistiu de jogar. Terminou o jogo com um total de ~w€.', [A]);
-        ciclo_jogo(NextQ)
+    processar_jogada(Input, RCerta, N, Acumulado, NovoN, NovoAcumulado, NivelActual),
+    (   NovoN == stop -> format('Desistiu de jogar. Terminou o jogo com um total de ~w€.', [Acumulado]);
+        ciclo_jogo(NovoN, NovoAcumulado)
     ).
 
 % Parar o jogo
-processar_jogada(stop, _, _Q, stop) :- !.
+processar_jogada(stop, _, _, Acumulado, stop, Acumulado).
 
 % Usar ajuda
-processar_jogada(ajuda, RCerta, Q, NextQ) :-
+processar_jogada(ajuda, RCerta, N, Acumulado, NovoN, NovoAcumulado, NivelActual) :-
     writeln('Que ajuda pretende usar? (50/50, Público, Telefone)'),
     read_line_to_string(user_input, RawAjuda),
     normalize_space(string(AjudaInput), RawAjuda),
     string_upper(AjudaInput, UpperAjuda),
-    ( UpperAjuda = "50/50" -> Ajuda = cinquenta_cinquenta
-    ; UpperAjuda = "PÚBLICO" -> Ajuda = publico
-    ; UpperAjuda = "TELEFONE" -> Ajuda = telefone
-    ; writeln('Ajuda inválida. Tente novamente.'), processar_jogada(ajuda, RCerta, Q, NextQ), !
+    ( 
+        UpperAjuda = "50/50" -> Ajuda = cinquenta_cinquenta;
+        UpperAjuda = "PÚBLICO" -> Ajuda = publico;
+        UpperAjuda = "TELEFONE" -> Ajuda = telefone;
+        writeln('Ajuda inválida. Tente novamente.'), processar_jogada(ajuda, RCerta, N, Acumulado, NovoN, NovoAcumulado), !
     ),
-    ( ajuda_usada(Ajuda) -> writeln('Já usou esta ajuda. Tente outra.'), processar_jogada(ajuda, RCerta, Q, NextQ), !
-    ; assertz(ajuda_usada(Ajuda)), ( catch(aplicar_ajuda(Ajuda, RCerta, Q), _, writeln('Erro ao aplicar ajuda')), true )
+    (ajuda_usada(Ajuda) -> 
+        writeln('Já usou esta ajuda. Tente outra.'), 
+        processar_jogada(ajuda, RCerta, N, Acumulado, NovoN, NovoAcumulado), !
+    ;
+        assertz(ajuda_usada(Ajuda)),
+        aplicar_ajuda(Ajuda, RCerta, N)
     ),
     % Após aplicar a ajuda, pedir novamente a resposta
     write('Resposta (A,B,C,D) ou stop do jogo: '),
     read_line_to_string(user_input, RawInput2), 
     normalize_space(string(Input2), RawInput2),
     string_upper(Input2, UpperInput2),
-    ( UpperInput2 = "STOP" -> InputFinal = stop ; atom_string(InputFinal, UpperInput2) ),
-    processar_jogada(InputFinal, RCerta, Q, NextQ).
+    ( 
+        UpperInput2 = "STOP" -> InputFinal = stop;
+        atom_string(InputFinal, UpperInput2)
+    ),
+    processar_jogada(InputFinal, RCerta, N, Acumulado, NovoN, NovoAcumulado).
 
 % Processar resposta correta (aplicando Modus Ponens / Modus Mistaken)
-processar_jogada(Resp, RCerta, Q, NextQ) :-
+processar_jogada(Resp, RCerta, N, _, NovoN, ValorN, NivelActual) :-
     Resp == RCerta, !,
     assertz(jogador_acertou),
-    (conclusao(progresso) -> writeln('Resposta certa! O jogo continua.')),
-    (conclusao_incorrecta(resposta_certa) -> writeln('Resposta certa! O jogo continua.')),
+    (conclusao(progresso) -> writeln('Resposta certa! O jogo continua.')),                  % Acertou na resposta
+    (conclusao_incorrecta(resposta_certa) -> writeln('Resposta certa! O jogo continua.')),  % Acertou com ajuda?
     retract(jogador_acertou),
-    valor_pergunta(Q, ValorQ),
-    ( acumulado(Old) -> true ; Old = 0 ),
-    NewAcc is Old + ValorQ,
-    retractall(acumulado(_)),
-    assertz(acumulado(NewAcc)),
-    retractall(nivel(_)),
-    assertz(nivel(Q)),
-    format('Acumulado atual: ~w€.\n', [NewAcc]),
-    NextQ is Q + 1.
+    valor_pergunta(N, ValorN),
+    assertz(acumulado(ValorN)),
+    NovoN is N + 1.
 
 % Processar resposta incorrrecta (aplicando Modus Tollens)
 % Numa resposta errada, calcular o patamar assegurado com base nas perguntas já respondidas corretamente,
 % reportar o patamar e continuar o jogo, avançando para a próxima pergunta.
-processar_jogada(_, _, Q, NextQ) :-
+processar_jogada(_, _, N, _, NovoN, Patamar, NivelActual) :-
     assertz(jogador_errou),
     (conclusao(nao_resposta_certa) -> write('Resposta errada.')),
     retract(jogador_errou),
-    M is Q - 1,
-    ( M >= 10 -> SafetyQ = 10 ; M >= 5 -> SafetyQ = 5 ; SafetyQ = 0 ),
-    ( SafetyQ =:= 0 -> Patamar = 0 ; valor_pergunta(SafetyQ, Patamar) ),
-    NextQ is SafetyQ + 1,
-    retractall(acumulado(_)), assertz(acumulado(Patamar)),
-    retractall(nivel(_)), assertz(nivel(SafetyQ)),
-    format(' Desce para o último patamar assegurado de ~w€ e nível ~w.\n', [Patamar, SafetyQ]).
+    (   retract(acumulado(_)),
+        N > 10 -> Patamar = 50000, assertz(acumulado(Patamar)), NivelActual = 10;
+        N > 5  -> Patamar = 1000, assertz(acumulado(Patamar)), NivelActual = 5;
+        Patamar = 0, assertz(acumulado(Patamar)), NivelActual = 1
+    ),
+    format(' Desce para o último patamar assegurado de ~w€ e para nível ~w.\n', [Patamar, NivelActual]),
+    NovoN is N + 1.
 
 % Patamares
 % patamar(N, 50000) :- N > 10, !.

@@ -1,1 +1,5 @@
+# Ignorar configurações do Visual Studio Code
 .vscode/*
+
+# Ignorar os seguintes ficherios temporários e de backup
+milionario.pl~
