@@ -1,66 +1,486 @@
 :- encoding(utf8).
 
-%pergunta(Numero, 'Pergunta?', 
+%pergunta(Numero, Indice, 'Pergunta?', 
 %         ['Opção A','Opção B','Opção C','Opção D'], 
 %         'Letra_da_Resposta_Correcta').
          
-pergunta(1, 'Qual é o plural da palavra pão?',
+pergunta(1, 1, 'Qual é o plural da palavra pão?',
          ['A - Pães','B - Pãos','C - Pãoses','D - Pãezes'],
          'A').
 
-pergunta(2, 'Quantos dias tem o mês de Fevereiro num ano comum?',
+pergunta(1, 2, 'Qual é a cor do céu num dia claro?',
+         ['A - Verde','B - Azul','C - Vermelho','D - Amarelo'],
+         'B').
+
+pergunta(1, 3, 'Quantos dias tem uma semana?',
+         ['A - 5','B - 6','C - 7','D - 8'],
+         'C').
+
+pergunta(1, 4, 'Qual é o oposto de "grande"?',
+         ['A - Pequeno','B - Médio','C - Alto','D - Largo'],
+        'A').
+
+pergunta(1, 5, 'Qual destes animais é um mamífero?',
+         ['A - Crocodilo','B - Golfinho','C - Tubarão','D - Lagarto'],
+         'B').
+
+pergunta(1, 6, 'Quantas patas tem um cão?',
+         ['A - Duas','B - Quatro','C - Seis','D - Oito'],
+         'B').
+
+pergunta(1, 7, 'Qual é a capital de Portugal?',
+         ['A - Porto','B - Lisboa','C - Coimbra','D - Faro'],
+         'B').
+         
+pergunta(1, 8, 'Qual é o som que uma vaca faz?',
+         ['A - Miau','B - Au Au','C - Muu','D - Quack'],
+        'C').
+
+pergunta(1, 9, 'Qual é a estação do ano que vem depois do Verão?',
+         ['A - Primavera','B - Outono','C - Inverno','D - Monção'],
+         'B').
+
+pergunta(1, 10, 'Qual é o número de patas de uma aranha?',
+         ['A - Seis','B - Oito','C - Dez','D - Doze'],
+         'B').
+
+pergunta(1, 11, 'Qual é a cor das folhas das árvores na Primavera?',
+         ['A - Vermelho','B - Amarelo','C - Verde','D - Castanho'],
+         'C').
+
+pergunta(1, 12, 'Qual é o nome do planeta onde vivemos?',
+         ['A - Marte','B - Terra','C - Júpiter','D - Saturno'],
+        'B').
+
+pergunta(1, 13, 'Quantos meses tem um ano?',
+         ['A - 10','B - 11','C - 12','D - 13'],
+         'C').
+
+pergunta(1, 14, 'Qual é o animal que diz "au au"?',
+         ['A - Gato','B - Pássaro','C - Cão','D - Peixe'],
+         'C').
+
+pergunta(1, 15, 'Qual é a cor do sol?',
+         ['A - Azul','B - Amarelo','C - Verde','D - Vermelho'],
+         'B').
+
+pergunta(2, 1, 'Quantos dias tem o mês de Fevereiro num ano comum?',
          ['A - 28','B - 29','C - 30','D - 31'],
          'A').
 
-pergunta(3, 'Qual é o símbolo químico da água?',
-         ['A - H2O','B - O2','C - CO2','D - HO'],
+pergunta(2, 2, 'Qual é o maior animal terrestre?',
+         ['A - Elefante','B - Girafa','C - Hipopótamo','D - Rinoceronte'],
          'A').
 
-pergunta(4, 'Em que continente se encontra Portugal?',
-         ['A - Ásia','B - América','C - Europa','D - África'],
-         'C').
-
-pergunta(5, 'Qual é o planeta mais próximo do Sol?',
-         ['A - Vénus','B - Mercúrio','C - Marte','D - Terra'],
+pergunta(2, 3, 'Qual é o nome do rio mais longo do mundo?',
+         ['A - Nilo','B - Amazonas','C - Yangtzé','D - Mississipi'],
          'B').
 
-pergunta(6, 'Quem escreveu "Os Lusíadas"?',
-         ['A - Camilo Castelo Branco','B - Padre António Vieira','C - Eça de Queirós','D - Luís de Camões'],
-         'D').
+pergunta(2, 4, 'Quem pintou a Capela Sistina?',
+         ['A - Leonardo da Vinci','B - Michelangelo','C - Rafael','D - Donatello'],
+         'B').
 
-pergunta(7, 'Em que ano começou a Segunda Guerra Mundial?',
-         ['A - 1939','B - 1941','C - 1918','D - 1945'],
-         'A').
+pergunta(2, 5, 'Qual é o planeta conhecido como o "Planeta Vermelho"?',
+         ['A - Vénus','B - Marte','C - Júpiter','D - Saturno'],
+         'B').
 
-pergunta(8, 'Qual é a capital da Noruega?',
-         ['A - Oslo','B - Estocolmo','C - Helsínquia','D - Copenhaga'],
-         'A').
-
-pergunta(9, 'Qual é o maior oceano do planeta?',
+pergunta(2, 6, 'Qual é o maior oceano do mundo?',
          ['A - Atlântico','B - Índico','C - Pacífico','D - Ártico'],
          'C').
 
-pergunta(10, 'Quem pintou a Mona Lisa?',
-         ['A - Michelangelo','B - Leonardo da Vinci','C - Botticelli','D - Rafael'],
-         'B').
+pergunta(2, 7, 'Quem escreveu "Dom Quixote"?',
+         ['A - Miguel de Cervantes','B - William Shakespeare','C - Victor Hugo','D - Mark Twain'],
+         'A').
 
-pergunta(11, 'Qual destes números é primo?',
-         ['A - 21','B - 33','C - 37','D - 49'],
+pergunta(2, 8, 'Qual é a capital da França?',
+         ['A - Berlim','B - Madrid','C - Roma','D - Paris'],
+         'D').
+
+pergunta(2, 9, 'Qual é o metal cujo símbolo químico é Fe?',
+         ['A - Ouro','B - Prata','C - Ferro','D - Cobre'],
          'C').
 
-pergunta(12, 'O que mede a escala Richter?',
-         ['A - Velocidade do vento','B - Intensidade sísmica','C - Temperatura','D - Radiação'],
+pergunta(2, 10, 'Quem foi o primeiro homem a pisar a Lua?',
+         ['A - Yuri Gagarin','B - Buzz Aldrin','C - Neil Armstrong','D - Michael Collins'],
+         'C').
+
+pergunta(2, 11, 'Qual é o maior planeta do sistema solar?',
+         ['A - Terra','B - Saturno','C - Júpiter','D - Urano'],
+         'C').
+
+pergunta(2, 12, 'Qual é o idioma oficial do Brasil?',
+         ['A - Espanhol','B - Português','C - Inglês','D - Francês'],
          'B').
 
-pergunta(13, 'Qual é o maior deserto do mundo?',
+pergunta(2, 13, 'Quem descobriu a América em 1492?',
+         ['A - Vasco da Gama','B - Cristóvão Colombo','C - Fernão de Magalhães','D - Pedro Álvares Cabral'],
+         'B').
+
+pergunta(2, 14, 'Qual é a fórmula química do sal de cozinha?',
+         ['A - H2O','B - CO2','C - NaCl','D - C6H12O6'],
+         'C').
+
+pergunta(3,  1, 'Qual é o símbolo químico da água?',
+         ['A - H2O','B - O2','C - CO2','D - HO'],
+         'A').
+
+pergunta(3, 2, 'Quem é o autor de "Romeu e Julieta"?',
+         ['A - Miguel de Cervantes','B - William Shakespeare','C - Mark Twain','D - Charles Dickens'],
+         'B').
+
+pergunta(3, 3, 'Qual é a capital da Alemanha?',
+         ['A - Viena','B - Berlim','C - Zurique','D - Hamburgo'],
+         'B').
+
+pergunta(3, 4, 'Qual é o maior mamífero do mundo?',
+         ['A - Elefante','B - Baleia Azul','C - Rinoceronte','D - Hipopótamo'],
+         'B').
+
+pergunta(3, 5, 'Quem pintou a "Mona Lisa"?',
+         ['A - Vincent van Gogh','B - Pablo Picasso','C - Leonardo da Vinci','D - Claude Monet'],
+         'C').
+
+pergunta(3, 6, 'Qual é o planeta mais próximo do Sol?',
+         ['A - Terra','B - Vénus','C - Mercúrio','D - Marte'],
+         'C').
+
+pergunta(3, 7, 'Qual é a língua mais falada no mundo?',
+         ['A - Inglês','B - Espanhol','C - Mandarim','D - Hindi'],
+         'C').
+
+pergunta(3, 8, 'Quem escreveu "A Odisséia"?',
+         ['A - Sófocles','B - Homero','C - Platão','D - Aristóteles'],
+         'B').
+
+pergunta(3, 9, 'Qual é o maior deserto do mundo?',
          ['A - Saara','B - Gobi','C - Antárctida','D - Kalahari'],
          'C').
 
-pergunta(14, 'Quem formulou a teoria da relatividade?',
+pergunta(3, 10, 'Qual é o elemento químico com símbolo O?',
+         ['A - Ouro','B - Oxigénio','C - Prata','D - Ferro'],
+         'B').
+
+pergunta(3, 11, 'Quem foi o primeiro presidente dos Estados Unidos?',
+         ['A - Thomas Jefferson','B - Abraham Lincoln','C - George Washington','D - John Adams'],
+         'C').
+
+pergunta(3, 12, 'Qual é a capital do Japão?',
+         ['A - Seul','B - Pequim','C - Tóquio','D - Xangai'],
+         'C').
+
+pergunta(3, 13, 'Qual é a moeda oficial do Reino Unido?',
+         ['A - Euro','B - Dólar','C - Libra Esterlina','D - Franco'],
+         'C').
+
+pergunta(4, 1, 'Em que continente se encontra Portugal?',
+         ['A - Ásia','B - América','C - Europa','D - África'],
+         'C').
+
+pergunta(4, 2, 'Quem escreveu "Os Lusíadas"?',
+         ['A - Luís de Camões','B - Fernando Pessoa','C - Eça de Queirós','D - José Saramago'],
+         'A').
+
+pergunta(4, 3, 'Qual é a capital de Espanha?',
+         ['A - Barcelona','B - Madrid','C - Sevilha','D - Valência'],
+         'B').
+        
+pergunta(4, 4, 'Qual é o maior planeta do sistema solar?',
+         ['A - Terra','B - Saturno','C - Júpiter','D - Urano'],
+         'C').
+
+pergunta(4, 5, 'Quem pintou a Capela Sistina?',
+         ['A - Leonardo da Vinci','B - Michelangelo','C - Rafael','D - Donatello'],
+         'B').
+
+pergunta(4, 6, 'Qual é o rio mais longo do mundo?',
+         ['A - Nilo','B - Amazonas','C - Yangtzé','D - Mississipi'],
+         'B').
+
+pergunta(4, 7, 'Qual é a capital da Itália?',
+         ['A - Milão','B - Roma','C - Veneza','D - Florença'],
+         'B').
+
+pergunta(4, 8, 'Quem descobriu a América em 1492?',
+         ['A - Vasco da Gama','B - Cristóvão Colombo','C - Fernão de Magalhães','D - Pedro Álvares Cabral'],
+         'B').
+
+pergunta(4, 9, 'Qual é o símbolo químico do ouro?',
+         ['A - Ag','B - Au','C - Fe','D - Cu'],
+         'B').
+
+pergunta(4, 10, 'Quem foi o primeiro homem a pisar a Lua?',
+         ['A - Yuri Gagarin','B - Buzz Aldrin','C - Neil Armstrong','D - Michael Collins'],
+         'C').
+
+pergunta(4, 11, 'Qual é a capital da Rússia?',
+         ['A - São Petersburgo','B - Moscovo','C - Kiev','D - Minsk'],
+         'B').
+
+pergunta(4, 12, 'Qual é o maior oceano do mundo?',
+         ['A - Atlântico','B - Índico','C - Pacífico','D - Ártico'],
+         'C').
+
+pergunta(5, 1, 'Qual é o planeta mais próximo do Sol?',
+         ['A - Vénus','B - Mercúrio','C - Marte','D - Terra'],
+         'B').
+        
+pergunta(5, 2, 'Quem escreveu "Dom Quixote"?',
+         ['A - Miguel de Cervantes','B - William Shakespeare','C - Victor Hugo','D - Mark Twain'],
+         'A').
+
+pergunta(5, 3, 'Qual é a capital da França?',
+         ['A - Berlim','B - Madrid','C - Roma','D - Paris'],
+         'D').
+
+pergunta(5, 4, 'Qual é o maior mamífero do mundo?',
+         ['A - Elefante','B - Baleia Azul','C - Rinoceronte','D - Hipopótamo'],
+         'B').
+
+pergunta(5, 5, 'Qual é o idioma oficial do Brasil?',
+         ['A - Espanhol','B - Português','C - Inglês','D - Francês'],
+         'B').
+
+pergunta(5, 6, 'Quem foi o primeiro presidente dos Estados Unidos?',
+         ['A - Thomas Jefferson','B - Abraham Lincoln','C - George Washington','D - John Adams'],
+         'C').
+
+pergunta(5, 7, 'Qual é a capital do Japão?',
+         ['A - Seul','B - Pequim','C - Tóquio','D - Xangai'],
+         'C').
+
+pergunta(5, 8, 'Qual é a moeda oficial do Reino Unido?',
+         ['A - Euro','B - Dólar','C - Libra Esterlina','D - Franco'],
+         'C').
+
+pergunta(5, 9, 'Qual é a fórmula química do sal de cozinha?',
+         ['A - H2O','B - CO2','C - NaCl','D - C6H12O6'],
+         'C').
+
+pergunta(5, 10, 'Quem formulou a teoria da relatividade?',
          ['A - Newton','B - Einstein','C - Tesla','D - Bohr'],
          'B').
 
-pergunta(15, 'Qual é o elemento químico com símbolo Au?',
+pergunta(5, 11, 'Qual é o maior deserto do mundo?',
+         ['A - Saara','B - Gobi','C - Antárctida','D - Kalahari'],
+         'C').
+
+pergunta(6, 1, 'Quem escreveu "Os Lusíadas"?',
+         ['A - Camilo Castelo Branco','B - Padre António Vieira','C - Eça de Queirós','D - Luís de Camões'],
+         'D').
+
+pergunta(6, 2, 'Qual é a capital de Espanha?',
+         ['A - Barcelona','B - Madrid','C - Sevilha','D - Valência'],
+         'B').
+
+pergunta(6, 3, 'Qual é o símbolo químico do ouro?',
+         ['A - Ag','B - Au','C - Fe','D - Cu'],
+         'B').
+
+pergunta(6, 4, 'Qual é a capital da Rússia?',
+         ['A - São Petersburgo','B - Moscovo','C - Kiev','D - Minsk'],
+         'B').
+
+pergunta(6, 5, 'Qual é o maior rio do mundo?',
+         ['A - Nilo','B - Amazonas','C - Yangtzé','D - Mississipi'],
+         'B').
+
+pergunta(6, 6, 'Quem pintou a "Mona Lisa"?',
+         ['A - Vincent van Gogh','B - Pablo Picasso','C - Leonardo da Vinci','D - Claude Monet'],
+         'C').
+
+pergunta(6, 7, 'Qual é a capital da Itália?',
+         ['A - Milão','B - Roma','C - Veneza','D - Florença'],
+         'B').
+
+pergunta(6, 8, 'Qual é o maior planeta do sistema solar?',
+         ['A - Terra','B - Saturno','C - Júpiter','D - Urano'],
+         'C').
+
+pergunta(6, 9, 'Quem descobriu a América em 1492?',
+         ['A - Vasco da Gama','B - Cristóvão Colombo','C - Fernão de Magalhães','D - Pedro Álvares Cabral'],
+         'B').
+
+pergunta(6, 10, 'Qual é o elemento químico com símbolo O?',
+         ['A - Ouro','B - Oxigénio','C - Prata','D - Ferro'],
+         'B').
+
+pergunta(7,  1, 'Em que ano começou a Segunda Guerra Mundial?',
+         ['A - 1939','B - 1941','C - 1918','D - 1945'],
+         'A').
+
+pergunta(7, 2, 'Quem foi o líder da Revolução Russa de 1917?',
+         ['A - Joseph Stalin','B - Vladimir Lenin','C - Leon Trotsky','D - Nikita Khrushchev'],
+         'B').
+
+pergunta(7, 3, 'Qual é a capital do Canadá?',
+         ['A - Toronto','B - Vancouver','C - Ottawa','D - Montreal'],
+         'C').
+
+pergunta(7, 4, 'Qual é o maior país do mundo em área?',
+         ['A - Canadá','B - China','C - Estados Unidos','D - Rússia'],
+         'D').
+
+pergunta(7, 5, 'Quem escreveu "Guerra e Paz"?',
+         ['A - Fiódor Dostoiévski','B - Liev Tolstói','C - Anton Tchekhov','D - Nikolai Gogol'],
+         'B').
+
+pergunta(7, 6, 'Qual é a capital da Austrália?',
+         ['A - Sydney','B - Melbourne','C - Canberra','D - Brisbane'],
+         'C').
+
+pergunta(7, 7, 'Quem foi o primeiro presidente da África do Sul após o apartheid?',
+         ['A - Thabo Mbeki','B - Nelson Mandela','C - Jacob Zuma','D - Cyril Ramaphosa'],
+         'B').
+
+pergunta(7, 8, 'Qual é a montanha mais alta do mundo?',
+         ['A - K2','B - Kangchenjunga','C - Lhotse','D - Evereste'],
+         'D').
+
+pergunta(7, 9, 'Quem pintou "A Noite Estrelada"?',
+         ['A - Pablo Picasso','B - Vincent van Gogh','C - Claude Monet','D - Salvador Dalí'],
+         'B').
+
+pergunta(8, 1, 'Qual é a capital da Noruega?',
+         ['A - Oslo','B - Estocolmo','C - Helsínquia','D - Copenhaga'],
+         'A').
+
+pergunta(8, 2, 'Quem escreveu "O Processo"?',
+         ['A - Franz Kafka','B - Albert Camus','C - Jean-Paul Sartre','D - Fyodor Dostoevsky'],
+         'A').
+
+pergunta(8, 3, 'Qual é o maior lago do mundo?',
+         ['A - Lago Superior','B - Mar Cáspio','C - Lago Vitória','D - Lago Tanganica'],
+         'B').
+
+pergunta(8, 4, 'Quem foi o primeiro imperador romano?',
+         ['A - Júlio César','B - Augusto','C - Nero','D - Calígula'],
+         'B').
+
+pergunta(8, 5, 'Qual é a capital da Turquia?',
+         ['A - Ancara','B - Istambul','C - Esmirna','D - Bursa'],
+         'A').
+
+pergunta(8, 6, 'Quem descobriu a penicilina?',
+         ['A - Alexander Fleming','B - Louis Pasteur','C - Robert Koch','D - Joseph Lister'],
+         'A').
+
+pergunta(8, 7, 'Qual é o maior arquipélago do mundo?',
+         ['A - Filipinas','B - Indonésia','C - Maldivas','D - Japão'],
+         'B').
+
+pergunta(8, 8, 'Quem escreveu "Cem Anos de Solidão"?',
+         ['A - Gabriel García Márquez','B - Mario Vargas Llosa','C - Julio Cortázar','D - Pablo Neruda'],
+         'A').
+
+pergunta(9, 1, 'Qual é o maior oceano do planeta?',
+         ['A - Atlântico','B - Índico','C - Pacífico','D - Ártico'],
+         'C').
+
+pergunta(9, 2, 'Quem foi o primeiro homem a orbitar a Terra?',
+         ['A - Neil Armstrong','B - Yuri Gagarin','C - Buzz Aldrin','D - Alan Shepard'],
+         'B').
+
+pergunta(9, 3, 'Qual é a capital da Suíça?',
+         ['A - Zurique','B - Genebra','C - Berna','D - Basileia'],
+         'C').
+
+pergunta(9, 4, 'Quem escreveu "O Grande Gatsby"?',
+         ['A - F. Scott Fitzgerald','B - Ernest Hemingway','C - John Steinbeck','D - Mark Twain'],
+         'A').
+
+pergunta(9, 5, 'Qual é o maior país da América do Sul?',
+         ['A - Argentina','B - Brasil','C - Colômbia','D - Peru'],
+         'B').
+
+pergunta(9, 6, 'Quem pintou "Guernica"?',
+         ['A - Pablo Picasso','B - Salvador Dalí','C - Joan Miró','D - Francisco Goya'],
+         'A').
+
+pergunta(9, 7, 'Qual é a capital da Índia?',
+         ['A - Mumbai','B - Nova Deli','C - Bangalore','D - Chennai'],
+         'B').
+
+pergunta(10, 1, 'Quem pintou a Mona Lisa?',
+         ['A - Michelangelo','B - Leonardo da Vinci','C - Botticelli','D - Rafael'],
+         'B').
+
+pergunta(10, 2, 'Qual é o maior planeta do sistema solar?',
+         ['A - Saturno','B - Júpiter','C - Urano','D - Neptuno'],
+         'B').
+
+pergunta(10, 3, 'Quem escreveu "Hamlet"?',
+         ['A - Charles Dickens','B - Mark Twain','C - William Shakespeare','D - Jane Austen'],
+         'C').
+
+pergunta(10, 4, 'Qual é a capital do Egito?',
+         ['A - Alexandria','B - Cairo','C - Luxor','D - Aswan'],
+         'B').
+
+pergunta(10, 5, 'Qual é o elemento químico com símbolo Fe?',
+         ['A - Ouro','B - Ferro','C - Prata','D - Cobre'],
+         'B').
+
+pergunta(10, 6, 'Quem foi o primeiro presidente dos Estados Unidos?',
+         ['A - Thomas Jefferson','B - Abraham Lincoln','C - George Washington','D - John Adams'],
+         'C').
+
+pergunta(11, 1, 'Qual destes números é primo?',
+         ['A - 21','B - 33','C - 37','D - 49'],
+         'C').
+
+pergunta(11, 2, 'Qual é a capital da Austrália?',
+         ['A - Sydney','B - Melbourne','C - Canberra','D - Brisbane'],
+         'C').
+
+pergunta(11, 3, 'Quem escreveu "A Divina Comédia"?',
+         ['A - Dante Alighieri','B - Giovanni Boccaccio','C - Petrarca','D - Ludovico Ariosto'],
+         'A').
+
+pergunta(11, 4, 'Qual é o maior país do mundo em área?',
+         ['A - Canadá','B - China','C - Estados Unidos','D - Rússia'],
+         'D').
+
+pergunta(11, 5, 'Quem foi o líder da Revolução Russa de 1917?',
+         ['A - Joseph Stalin','B - Vladimir Lenin','C - Leon Trotsky','D - Nikita Khrushchev'],
+         'B').
+
+pergunta(12, 1, 'O que mede a escala Richter?',
+         ['A - Velocidade do vento','B - Intensidade sísmica','C - Temperatura','D - Radiação'],
+         'B').
+
+pergunta(12, 2, 'Qual é o maior órgão do corpo humano?',
+         ['A - Fígado','B - Coração','C - Pele','D - Pulmões'],
+         'C').
+
+pergunta(12, 3, 'Quem descobriu a penicilina?',
+         ['A - Alexander Fleming','B - Louis Pasteur','C - Robert Koch','D - Joseph Lister'],
+         'A').
+
+pergunta(12, 4, 'Qual é a capital da Noruega?',
+         ['A - Oslo','B - Estocolmo','C - Helsínquia','D - Copenhaga'],
+         'A').
+
+pergunta(13, 1, 'Qual é o maior deserto do mundo?',
+         ['A - Saara','B - Gobi','C - Antárctida','D - Kalahari'],
+         'C').
+
+pergunta(13, 2, 'Quem foi o primeiro imperador romano?',
+         ['A - Júlio César','B - Augusto','C - Nero','D - Calígula'],
+         'B').
+
+pergunta(13, 3, 'Qual é a capital da Turquia?',
+         ['A - Ancara','B - Istambul','C - Esmirna','D - Bursa'],
+         'A').
+
+pergunta(14, 1, 'Quem formulou a teoria da relatividade?',
+         ['A - Newton','B - Einstein','C - Tesla','D - Bohr'],
+         'B').
+
+pergunta(14, 2, 'Qual é a montanha mais alta do mundo?',
+         ['A - K2','B - Kangchenjunga','C - Lhotse','D - Evereste'],
+         'D').
+
+pergunta(15, 1, 'Qual é o elemento químico com símbolo Au?',
          ['A - Alumínio','B - Prata','C - Ouro','D - Argónio'],
          'C').
 
