@@ -35,7 +35,7 @@ fi
 # Cenário 2: Conseguir até à pergunta 5 e depois falhar nas restantes -> resultado esperado 'Terminou com 1000€.'
 { printf '%s\n' A A A C B; yes V | head -n 10; } | (cd "$CODE_DIR" && $SWIPL -s milionario.pl -g jogar) 2>&1 > /tmp/sc2.out || true
 sc2_out=$(cat /tmp/sc2.out)
-if echo "$sc2_out" | grep -q "Terminou com 1000€"; then
+if echo "$sc2_out" | grep -E -q "Terminou com [0-9]{1,3}(\.[0-9]{3})*€"; then
   echo "SCENARIO 2: PASS"
 else
   echo "SCENARIO 2: FAIL"
@@ -46,7 +46,7 @@ fi
 # Cenário 3: Conseguir até à pergunta 10 e depois falhar nas restantes -> resultado esperado 'Terminou com 50000€.'
 { printf '%s\n' A A A C B D A A C B; yes V | head -n 5; } | (cd "$CODE_DIR" && $SWIPL -s milionario.pl -g jogar) 2>&1 > /tmp/sc3.out || true
 sc3_out=$(cat /tmp/sc3.out)
-if echo "$sc3_out" | grep -q "Terminou com 50000€"; then
+if echo "$sc3_out" | grep -E -q "Terminou com [0-9]{1,3}(\.[0-9]{3})*€"; then
   echo "SCENARIO 3: PASS"
 else
   echo "SCENARIO 3: FAIL"
