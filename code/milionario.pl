@@ -3,6 +3,7 @@
 % ---------------------------------
 :- encoding(utf8).
 :- use_module(library(pcre), [re_replace/4]).
+:- use_module(player).
 :- dynamic(ajuda_usada/1).      % Para registar as ajudas usadas
 :- dynamic(jogador_acertou/0).  % Para registar se o jogador acertou a pergunta
 :- dynamic(jogador_errou/0).    % Para registar se o jogador errou a pergunta
@@ -72,6 +73,8 @@ valor_pergunta(15, 1000000).
 % --- Jogo ---
 % ------------
 jogar :-
+    display_logo,
+    play_sound('music/main-theme.mp3'),
     % Carregar perguntas
     consult('perguntas.pl'),
     % Reset do estado do jogo
@@ -90,6 +93,10 @@ jogar :-
     writeln('--- Bem-Vindo ao Quem Quer Ser Milionário ---'),
     % Inserir aqui o som de ínicio do jogo? 
     % Início do jogo na 1ª pergunta e com 0€ acumulados.
+    writeln('\nPressione qualquer tecla para iniciar o desafio...'),
+    get_single_char(_),
+    play_sound('./music/let-s-play.mp3'),
+    sleep(5),
     ciclo_jogo(1), !, halt.
 
 % Fim do jogo, após 15 perguntas certas consecutivas.
@@ -104,6 +111,8 @@ ciclo_jogo(16) :-
 
 % Jogo
 ciclo_jogo(N) :-
+    format(atom(SoundFile), './music/levels/level~w.mp3', [N]),
+    play_sound(SoundFile),
     % Se já foram apresentadas 15 perguntas, terminar via ciclo_jogo(16).
     ( plays_done(D), D >= 15 -> ciclo_jogo(16) ; true ),
     % validar índice do nível (questão) e selecionar um índice para esse nível
@@ -119,7 +128,6 @@ ciclo_jogo(N) :-
     format_thousands(ValorN, FValor),
     format('\nPergunta ~w (valor ~s€)\n~w\n', [QNum, FValor, Texto]),
     mostrar_opcoes(Opcoes),
-    write('\nResposta (A,B,C,D), Ajuda (50/50, Público, Telefone) ou Stop do jogo: '),
     % Ler uma linha do utilizador para que possa digitar a opção escolhida (e.g., A ou a), ou Ajuda, ou Stop sem a sintaxe Prolog.
     read_line_to_string(user_input, RawInput),
     % Remover espaços em branco
@@ -129,6 +137,8 @@ ciclo_jogo(N) :-
     atom_string(UpperAtom, UpperString),
     (   UpperAtom == 'STOP' -> Input = stop;
         UpperAtom == 'AJUDA' -> Input = ajuda;
+        play_sound('./music/final-answer.mp3'),
+        sleep(4),
         Input = UpperAtom
     ),
     % incrementar contador de perguntas apresentadas
@@ -146,14 +156,16 @@ processar_jogada('50/50', RCerta, Q, Index, NextQ) :- !,
     Ajuda = cinquenta_cinquenta,
     ( ajuda_usada(Ajuda) ->
         writeln('Já usou esta ajuda. Tente outra.'),
-        write('Resposta (A,B,C,D) ou Stop do jogo: '),
+        writeln('\nResposta (A,B,C,D) ou Stop do jogo:'),
+        write('> '),
         read_line_to_string(user_input, RawInput2), 
         normalize_space(string(Input2), RawInput2),
         string_upper(Input2, UpperInput2),
         ( UpperInput2 = "STOP" -> InputFinal = stop ; atom_string(InputFinal, UpperInput2) ),
         processar_jogada(InputFinal, RCerta, Q, Index, NextQ)
     ; assertz(ajuda_usada(Ajuda)), ( catch(aplicar_ajuda(Ajuda, RCerta, Q), E, (print_message(error,E), writeln('Erro ao aplicar ajuda'))) ; true ),
-      write('Resposta (A,B,C,D) ou Stop do jogo: '),
+      writeln('Resposta (A,B,C,D) ou Stop do jogo: '),
+      write('> '), 
       read_line_to_string(user_input, RawInput2), 
       normalize_space(string(Input2b), RawInput2),
       string_upper(Input2b, UpperInput2b),
@@ -165,14 +177,16 @@ processar_jogada('PUBLICO', RCerta, Q, Index, NextQ) :- !,
     Ajuda = publico,
     ( ajuda_usada(Ajuda) ->
         writeln('Já usou esta ajuda. Tente outra.'),
-        write('Resposta (A,B,C,D) ou Stop do jogo: '),
+        writeln('Resposta (A,B,C,D) ou Stop do jogo: '),
+        write('> '), 
         read_line_to_string(user_input, RawInput2), 
         normalize_space(string(Input2), RawInput2),
         string_upper(Input2, UpperInput2),
         ( UpperInput2 = "STOP" -> InputFinal = stop ; atom_string(InputFinal, UpperInput2) ),
         processar_jogada(InputFinal, RCerta, Q, Index, NextQ)
     ; assertz(ajuda_usada(Ajuda)), ( catch(aplicar_ajuda(Ajuda, RCerta, Q), E, (print_message(error,E), writeln('Erro ao aplicar ajuda'))) ; true ),
-      write('Resposta (A,B,C,D) ou Stop do jogo: '),
+      writeln('Resposta (A,B,C,D) ou Stop do jogo: '),
+      write('> '), 
       read_line_to_string(user_input, RawInput2), 
       normalize_space(string(Input2b), RawInput2),
       string_upper(Input2b, UpperInput2b),
@@ -187,14 +201,16 @@ processar_jogada('TELEFONE', RCerta, Q, Index, NextQ) :- !,
     Ajuda = telefone,
     ( ajuda_usada(Ajuda) ->
         writeln('Já usou esta ajuda. Tente outra.'),
-        write('Resposta (A,B,C,D) ou Stop do jogo: '),
+        writeln('Resposta (A,B,C,D) ou Stop do jogo: '),
+        write('> '), 
         read_line_to_string(user_input, RawInput2), 
         normalize_space(string(Input2), RawInput2),
         string_upper(Input2, UpperInput2),
         ( UpperInput2 = "STOP" -> InputFinal = stop ; atom_string(InputFinal, UpperInput2) ),
         processar_jogada(InputFinal, RCerta, Q, Index, NextQ)
     ; assertz(ajuda_usada(Ajuda)), ( catch(aplicar_ajuda(Ajuda, RCerta, Q), E, (print_message(error,E), writeln('Erro ao aplicar ajuda'))) ; true ),
-      write('Resposta (A,B,C,D) ou Stop do jogo: '),
+      writeln('Resposta (A,B,C,D) ou Stop do jogo: '),
+      write('> '), 
       read_line_to_string(user_input, RawInput2), 
       normalize_space(string(Input2b), RawInput2),
       string_upper(Input2b, UpperInput2b),
@@ -209,16 +225,17 @@ processar_jogada(ajuda, RCerta, Q, Index, NextQ) :-
     normalize_space(string(AjudaInput), RawAjuda),
     string_upper(AjudaInput, UpperAjuda),
     ( UpperAjuda = "50/50" -> Ajuda = cinquenta_cinquenta
-    ; UpperAjuda = "PUBLICO" -> Ajuda = publico
-    ; UpperAjuda = "PÚBLICO" -> Ajuda = publico
-    ; UpperAjuda = "TELEFONE" -> Ajuda = telefone
+    ; UpperAjuda = "PUBLICO" -> Ajuda = publico, play_sound('./music/fastest-finger.mp3')
+    ; UpperAjuda = "PÚBLICO" -> Ajuda = publico, play_sound('./music/fastest-finger.mp3')
+    ; UpperAjuda = "TELEFONE" -> Ajuda = telefone, play_sound('./music/dialing-numbers.mp3'), sleep(3), play_sound('./music/phone-end.mp3')
     ; writeln('Ajuda inválida. Tente novamente.'), processar_jogada(ajuda, RCerta, Q, Index, NextQ), !
     ),
     ( ajuda_usada(Ajuda) -> writeln('Já usou esta ajuda. Tente outra.'), processar_jogada(ajuda, RCerta, Q, Index, NextQ), !
     ; assertz(ajuda_usada(Ajuda)), ( catch(aplicar_ajuda(Ajuda, RCerta, Q), E, (print_message(error,E), writeln('Erro ao aplicar ajuda'))) ; true )
     ),
     % Após aplicar a ajuda, pedir novamente a resposta
-    write('Resposta (A,B,C,D) ou Stop do jogo: '),
+    writeln('Resposta (A,B,C,D) ou Stop do jogo: '),
+    write('> '), 
     read_line_to_string(user_input, RawInput2), 
     normalize_space(string(Input2), RawInput2),
     string_upper(Input2, UpperInput2),
@@ -228,6 +245,8 @@ processar_jogada(ajuda, RCerta, Q, Index, NextQ) :-
 % Processar resposta correta (aplicando Modus Ponens / Modus Mistaken)
 processar_jogada(Resp, RCerta, Q, _Index, NextQ) :-
     Resp == RCerta, !,
+    play_sound('./music/correct-answer.mp3'),
+    sleep(4),
     % reset any fail counter state (no-op)
     assertz(jogador_acertou),
     % Print success once whether proven by normal modus ponens or by help-driven modus mistaken
@@ -248,6 +267,8 @@ processar_jogada(Resp, RCerta, Q, _Index, NextQ) :-
 % Numa resposta errada, calcular o patamar assegurado com base nas perguntas já respondidas corretamente,
 % reportar o patamar e continuar o jogo, avançando para a próxima pergunta.
 processar_jogada(_, _, Q, _Index, NextQ) :-
+    play_sound('./music/wrong-answer.mp3'),
+    sleep(4),
     assertz(jogador_errou),
     (conclusao(nao_resposta_certa) -> write('Resposta errada.')),
     retract(jogador_errou),
@@ -380,3 +401,19 @@ group_chunks(Rev, [Chunk|Rest]) :-
 group_chunks(Rev, [Rev]) :- Rev \= [].
 
 chars_to_string(Chars, Str) :- string_chars(Str, Chars).
+
+display_logo :-
+    exists_file('million.txt'),
+    setup_call_cleanup(
+        open('million.txt', read, In),
+        ( repeat,
+          read_line_to_string(In, Str),
+          (   Str == end_of_file
+          ->  !
+          ;   writeln(Str),
+              fail
+          )
+        ),
+        close(In)
+    ), !.
+display_logo :- writeln('--- QUEM QUER SER MILIONÁRIO ---').
