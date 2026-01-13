@@ -2,4 +2,4 @@
 .vscode/*
 
 # Ignorar os seguintes ficherios temporários e de backup
-code/milionario.pl~
+code/milionario_bkp.pl~
