@@ -42,9 +42,9 @@ Se responder incorretamente, não perde tudo. Ficará com o valor do último pat
 | Pergunta | Valor 
 | :--- | :--- 
 | 1 - 4 | 100€ a 500€ 
-| 5 | 1.000€ 
+| 5 | 1.000€ <<patamar de segurança>>
 | 6 - 9 | 2.000€ a 20.000€ 
-| 10 | 50.000€ 
+| 10 | 50.000€ <<patamar de segurança>>
 | 11 - 14 | 75.000€ a 500.000€ 
 | 15 | 1.000.000€
 
